@@ -1,0 +1,22 @@
+.centerMe,.box{
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+  width: 600px;
+}
+.post{
+  border-style: ridge;
+  min-height:80px;
+  margin-bottom:40px;
+}
+.aboutme{
+  margin-left:50px;
+}
+#prof {
+  width: 300px;
+}
+
+.profImage{
+  margin-top: 30px;
+  width:400px;
+}

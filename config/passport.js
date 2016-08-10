@@ -50,7 +50,8 @@ module.exports = function(passport) {
                 // set the user's local credentials
                 newUser.username = username;
                 newUser.password = newUser.generateHash(password);
-                console.log(newUser);
+                newUser.image = "noimage.png";
+                newUser.about = "No infos yet";
                 // save the user
                 newUser.save(function(err) {
                     if (err)
@@ -87,7 +88,6 @@ module.exports = function(passport) {
             if (!user.validPassword(password))
                 return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
             // all is well, return successful user
-            console.log(user);
             return done(null, user);
 
         });

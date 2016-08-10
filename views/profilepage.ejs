@@ -1,0 +1,25 @@
+<% include ./partials/header %>
+
+<div class="row">
+  <div class="aboutme col-lg-5">
+      <div class="profile-pic">
+        <img id="prof" src="/uploads/<%= currentUser.image %>"/>
+      </div>
+      <form class="form-horizontal" action="/userpage/addFoto" method="POST" enctype="multipart/form-data">
+              <div class="form-group profImage">
+                  <label for="profileImage">Select Image</label>
+                  <div class="input-group">
+                      <input type="file" class="form-control" id="profileImage" name="profileImage" >
+                      <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                  </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+  </div>
+  <div class="mywall col-lg-7">
+
+  </div>
+</div>
+
+
+<% include ./partials/footer %>

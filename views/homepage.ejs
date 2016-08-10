@@ -1,5 +1,32 @@
 <% include ./partials/header %>
 
+<form role="form" action="/homepage/add" method="POST">
+  <div class="form-group centerMe" >
+      <div class="form-group">
+        <div class="input-group">
+          <textarea name="main" id="main" class="form-control" rows="5" placeholder="Write your post..." required ></textarea>
+          <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+        </div>
+      </div>
+      <div class="text-center">
+          <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-lg btn-primary text-center ">
+      </div>
+    </div>
+</form>
+
+<div class="container">
+  <div class="box">
+      <% for (var i = posts.length-1; i>=0; i--){ %>
+        <div class="post">
+          <p>
+            <%= posts[i].main %>
+          </p>
+        </div>
+      <% } %>
+
+  </div>
+
+</div>
 
 
 <% include ./partials/footer %>

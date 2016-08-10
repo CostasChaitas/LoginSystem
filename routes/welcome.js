@@ -8,9 +8,7 @@ router.get('/', function(req, res, next) {
   res.render('welcome.ejs');
 });
 
-router.get('/homepage', isLoggedIn, function(req, res, next) {
-  res.render('homepage.ejs');
-});
+
 
 router.get('/register', function(req, res) {
     res.render('register.ejs', { message: req.flash('signupMessage') });
