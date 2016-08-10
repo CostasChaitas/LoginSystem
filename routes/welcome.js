@@ -8,24 +8,29 @@ router.get('/', function(req, res, next) {
   res.render('welcome.ejs');
 });
 
+router.get('/homepage', isLoggedIn, function(req, res, next) {
+  res.render('homepage.ejs');
+});
+
 router.get('/register', function(req, res) {
-    res.render('register.ejs');
+    res.render('register.ejs', { message: req.flash('signupMessage') });
 });
 
 // app.post('/signup', do all our passport stuff here);
 router.post('/register', passport.authenticate('signup',{
-    successRedirect: "/",
+    successRedirect: "/login",
     failureRedirect: "/register",
-
+    failureFlash : true // allow flash messages
 }));
 
 router.get('/login', function(req, res) {
-    res.render('login.ejs');
+    res.render('login.ejs', { message: req.flash('loginMessage') });
 });
 
 router.post('/login', passport.authenticate("login", {
-    successRedirect: "/",
+    successRedirect: "/homepage",
     failureRedirect: "/login",
+    failureFlash : true // allow flash messages
 }));
 
 router.get('/logout', function(req, res) {
