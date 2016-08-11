@@ -1,20 +1,48 @@
 var express = require('express');
 var router = express.Router();
 var passport = require("passport");
+var asyncc = require("async");
 var User= require("../models/user");
 var Post = require("../models/post");
 
 
+
 router.get('/', isLoggedIn, function(req, res, next) {
 
-  Post.find({},{}, function(err, posts){
-      if(err){
-        console.log(err);
-      }else{
+  asyncc.parallel([
 
-         res.render('homepage', {"posts": posts} );
-      }
-	});
+  function(callback){
+
+    Post.find({},{}, function(err, posts){
+        if(err){
+          console.log(err);
+        }else{
+
+           callback(null, posts);
+        }
+    });
+  },
+
+  function(callback){
+       User.find({},{}, function(err, users){
+        if(err){
+          console.log(err);
+        }else{
+            callback(null, users);
+        }
+      });
+  }
+  ],
+  function(err, results){
+          // res.send(results);
+          res.render('homepage', {
+              "posts": results[0],
+              "users": results[1]
+          });
+  });
+
+
+
 
 });
 
@@ -25,7 +53,7 @@ router.post('/add', isLoggedIn, function(req ,res, next){
 
   var newPost = {
     main : main,
-    time : new Date().getTime(),
+    time : new Date(),
     username : username,
     comments : [],
     likes : []

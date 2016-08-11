@@ -40,8 +40,8 @@ router.post('/addFoto', isLoggedIn, multerMiddleware.single('profileImage'), fun
         });
       }
   });
-  
-  res.render("homepage.ejs");
+
+  res.redirect("/userpage/"+id);
 });
 
 

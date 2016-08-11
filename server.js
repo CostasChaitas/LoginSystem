@@ -10,6 +10,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local');
 var flash    = require('connect-flash');
 var path = require('path');
+var moment = require('moment');
 
 var configDB = require('./config/database.js');
 mongoose.connect(configDB.url); // connect to our database
@@ -34,7 +35,11 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json()); // get information from html forms
 app.use(cookieParser());
-app.use(session({ secret: 'keyboard-cat' }));
+app.use(session({
+	secret: 'keyboard-cat',
+	resave: false,
+  saveUninitialized: true
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -42,6 +47,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 app.use(function (req,res,next) {
 	res.locals.currentUser = req.user;
+	app.locals.moment = moment;
 	next();
 });
 

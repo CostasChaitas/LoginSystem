@@ -18,7 +18,23 @@
   <div class="box">
       <% for (var i = posts.length-1; i>=0; i--){ %>
         <div class="post">
-          <p>
+          <div class="userDetails">
+            <div class="image">
+              <% for (var y = users.length-1; y>=0; y--){ %>
+                <% if(posts[i].username == users[y].username){ %>
+                  <img id="userImg" src="/uploads/<%= users[y].image %>"/>
+                <% } %>
+              <% } %>
+            </div>
+            <div class="user">
+              <div class="name"><h4><%= posts[i].username %></h4></div>
+              <div class="timestamp"><%= moment(posts[i].time).fromNow() %></div>
+            </div>
+          </div>
+
+          <div class="break"></div>
+
+          <p class="text">
             <%= posts[i].main %>
           </p>
         </div>
